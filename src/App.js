@@ -30,6 +30,7 @@ const App = () => (
   <Router>
     <div>
       <Links />
+      <Switch>
       <Route exact path="/" component={Home} />
       {/*<Route path="/about" render={() => <h1>About in func</h1>} /> */}
       <Route
@@ -58,6 +59,9 @@ const App = () => (
           <p>{/*new URLSearchParams(location.search).get('id')*/}</p>
         </div>
       )} />
+
+      <Route render={ () => <h1> Page not found</h1>} />
+      </Switch>
     </div>
   </Router>
 )
