@@ -1,5 +1,5 @@
 import React from 'react';
-import  {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
+import  {BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom';
 import './App.css';
 
 const Home = (props) => {
@@ -26,6 +26,8 @@ const Links = () => (
   </nav>
 )
 
+const loggedin = false;
+
 const App = () => (
   <Router>
     <div>
@@ -35,7 +37,7 @@ const App = () => (
       {/*<Route path="/about" render={() => <h1>About in func</h1>} /> */}
       <Route
         path="/about"
-        children={({match}) => match && <h1>About children</h1>} />
+        children={({match}) => match && <h1>About</h1>} />
       <Route path="/contact" render={() => <h1>contact</h1>} />
 
       <Route path="/page/:page?-:subpage?" render={ ({match}) => (
@@ -60,7 +62,19 @@ const App = () => (
         </div>
       )} />
 
+      <Route path="/old" render={()=>(
+          <Redirect to="/about" />
+      )} />
+
+      <Route path="/protected" render={() => (
+        loggedin
+        ? <h1> Welcome to the protected page</h1>
+        : <Redirect to="/" />
+
+      )} />
+
       <Route render={ () => <h1> Page not found</h1>} />
+
       </Switch>
     </div>
   </Router>
