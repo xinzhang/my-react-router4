@@ -22,6 +22,7 @@ const Links = () => (
       isActive={isActiveFunc}
       activeClassName="active"
       to="/contact">Contact</NavLink>
+    <NavLink to="/query/?id=123">Query Inline</NavLink>
   </nav>
 )
 
@@ -35,17 +36,27 @@ const App = () => (
         path="/about"
         children={({match}) => match && <h1>About children</h1>} />
       <Route path="/contact" render={() => <h1>contact</h1>} />
+
       <Route path="/page/:page?-:subpage?" render={ ({match}) => (
         <h1>
           Page: {match.params.page || 'nothing'} <br />
           SubPage: {match.params.subpage || 'nothing'}
         </h1>
       )} />
+
       <Route path="/regex/:a(\d+)/:b" render={ ({match}) => (
         <h1>
           a: {match.params.a || 'nothing'} <br />
           b: {match.params.b || 'nothing'}
         </h1>
+      )} />
+
+      <Route path="/query" render={({match, location}) => (
+        <div>
+          <p>root</p>
+          <p>{JSON.stringify(location)}</p>
+          <p>{/*new URLSearchParams(location.search).get('id')*/}</p>
+        </div>
       )} />
     </div>
   </Router>
