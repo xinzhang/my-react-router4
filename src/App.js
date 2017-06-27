@@ -1,5 +1,5 @@
 import React from 'react';
-import  {BrowserRouter as Router, Route, NavLink} from 'react-router-dom';
+import  {BrowserRouter as Router, Route, NavLink, Switch} from 'react-router-dom';
 import './App.css';
 
 const Home = (props) => {
