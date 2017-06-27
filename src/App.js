@@ -1,5 +1,5 @@
 import React from 'react';
-import  {BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom';
+import  {BrowserRouter as Router, Route, NavLink, Switch, Redirect, Prompt} from 'react-router-dom';
 import './App.css';
 
 const Home = (props) => {
@@ -23,10 +23,27 @@ const Links = () => (
       activeClassName="active"
       to="/contact">Contact</NavLink>
     <NavLink to="/query/?id=123">Query Inline</NavLink>
+    <NavLink to="/form">Form</NavLink>
   </nav>
 )
 
 const loggedin = false;
+
+class Form extends React.Component {
+  state = {dirty: false}
+  setDirty=()=>this.setState({dirty:true})
+  render() {
+    return(
+    <div>
+      <h1>Form</h1>
+      <input type="text" onInput={this.setDirty} />
+      <Prompt
+        when={this.state.dirty}
+        message="Data will loss"
+        />
+    </div>
+  )}
+}
 
 const App = () => (
   <Router>
@@ -72,6 +89,8 @@ const App = () => (
         : <Redirect to="/" />
 
       )} />
+
+      <Route path="/form" component={Form} />
 
       <Route render={ () => <h1> Page not found</h1>} />
 
